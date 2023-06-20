@@ -71,3 +71,13 @@ jobs:
           from_step: 3
           to_step: 4
           branch_name: ci
+          
+      - name: Run markdown lint
+        run: |
+          npm install remark-cli remark-preset-lint-consistent
+          npx remark . --use remark-preset-lint-consistent --frail
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: remark-lint-report
+          path: public/
